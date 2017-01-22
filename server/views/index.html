@@ -37,6 +37,7 @@
                   <input type="checkbox" id="myonoffswitch">
                   <label><i></i></label>
                 </div>
+                <div class="temp"></div>
               </div>
           </div>
         </div>
@@ -62,7 +63,7 @@
       console.log("connected to the pi");
       });
       socket.on('temp',function(temp){
-        console.log(temp);
+        jQuery('.temp').append('<h3>' +temp + '/h3');
       });
     </script>
 
