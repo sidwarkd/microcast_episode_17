@@ -40,11 +40,7 @@ socket.on("connect", function(){
   socket.on("updateState", function(state){
     console.log("The new state is: " + state);
     gpio.write(config.led, !state);
-    socket.emit('temp',{
-    
-    temperature:sensorLib.read().temperature.toFixed(2)
-    
-    });
+    socket.emit('temp',sensorLib.read().temperature.toFixed(2));
     console.log("temp data sended to the client");
   });
 })
