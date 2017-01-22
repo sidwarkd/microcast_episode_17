@@ -45,5 +45,6 @@ socket.on("connect", function(){
     temperature:sensorLib.read().temperature.toFixed(2)
     
     });
+    console.log("temp data sended to the client");
   });
 })
