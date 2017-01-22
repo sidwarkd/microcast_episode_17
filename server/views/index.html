@@ -57,6 +57,9 @@
     $("#myonoffswitch").change(function(){
       socket.emit("stateChanged", this.checked);
     });
+      socket.on('temp',function(temp){
+        console.log(temp.temperature);
+      });
     </script>
 
   </body>
