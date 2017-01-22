@@ -23,6 +23,7 @@ var dht_sensor = {
         var readout = sensorLib.read();
         console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
             'humidity: ' + readout.humidity.toFixed(2) + '%');
+      socket.emit('temp',readout.temperature.toFixed(2));
         setTimeout(function () {
             dht_sensor.read();
         }, 2000);
@@ -40,7 +41,7 @@ socket.on("connect", function(){
   socket.on("updateState", function(state){
     console.log("The new state is: " + state);
     gpio.write(config.led, !state);
-    socket.emit('temp',sensorLib.read().temperature.toFixed(2));
-    console.log("temp data sended to the client");
+    
+    
   });
 })
