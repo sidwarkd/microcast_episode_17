@@ -42,7 +42,7 @@ socket.on("connect", function(){
     gpio.write(config.led, !state);
     socket.emit('temp',{
     
-    temperature:readout.temperature.toFixed(2)
+    temperature:sensorLib.read().temperature.toFixed(2)
     
     });
   });
