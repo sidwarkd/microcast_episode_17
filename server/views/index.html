@@ -58,8 +58,11 @@
       socket.emit("stateChanged", this.checked);
       console.log("led state emitted");
     });
+      socket.on('connect',function(){
+      console.log("connected to the pi");
+      });
       socket.on('temp',function(temp){
-        console.log(temp.temperature);
+        console.log(temp);
       });
     </script>
 
