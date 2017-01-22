@@ -13,6 +13,9 @@ var io = require("socket.io").listen(server);
 io.on("connection", function(socket){
   console.log("Client Connected");
 
+   socket.on('temp',function(temp){
+        console.log(temp.temp);
+      });
   socket.on("stateChanged", function(state){
     console.log("State Changed: " + state);
     io.emit("updateState", state);
