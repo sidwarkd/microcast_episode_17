@@ -14,9 +14,9 @@ var io = require("socket.io").listen(server);
 io.on("connection", function(socket){
   console.log("Client Connected");
   socket.on('msg',function(msg){
-   		packet[text]=msg.temp;
+   		packet['text']=msg.temp;
         console.log(msg.temp);
-        console.log(packet[text]);
+        console.log(packet['text']);
         
         console.log("data send to front end");
       });
