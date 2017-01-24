@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 var debug = require('debug')('server');
 var app = require('../app');
-var packet={};
+var packet=0;
 
 app.set('port', process.env.PORT || 3000);
 
@@ -13,14 +13,21 @@ var io = require("socket.io").listen(server);
 
 io.on("connection", function(socket){
   console.log("Client Connected");
-  socket.on('msg',function(msg){
-   		packet['text']=msg.temp;
+  
+  
+  setTimeout(function () {
+            socket.on('msg',function(msg){
+   		packet=msg.temp;
         console.log(msg.temp);
-        console.log(packet['text']);
+        console.log(packet);
         
         console.log("data send to front end");
       });
-  socket.emit('chat',packet);
+        }, 2000);
+  
+  setTimeout(function(){socket.emit('chat',packet);},2000);
+  
+  
 
    
   socket.on("stateChanged", function(state){
