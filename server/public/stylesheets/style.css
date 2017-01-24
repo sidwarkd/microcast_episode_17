@@ -18,7 +18,13 @@ a:hover {
   background-color: #fff;
   border: 1px solid #fff;
 }
+.readings{
 
+  height:300px;
+  width: 300px;
+  color:white;
+  font-size: 50px;
+}
 
 /*
  * Base structure
