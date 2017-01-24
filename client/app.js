@@ -3,7 +3,7 @@ var socket = require("socket.io-client")(config.server_url);
 var gpio = require("rpi-gpio");
 var sensorLib = require('node-dht-sensor');
 
-var data={};
+var data=0;
 
 process.on("SIGINT", function(){
   gpio.write(config.led, 1, function(){
@@ -25,7 +25,7 @@ var dht_sensor = {
         var readout = sensorLib.read();
         console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
             'humidity: ' + readout.humidity.toFixed(2) + '%');
-      data['temp']=readout.temperature;
+      data=readout.temperature;
         setTimeout(function () {
             dht_sensor.read();
         }, 2000);
