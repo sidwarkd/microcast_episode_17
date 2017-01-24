@@ -42,6 +42,12 @@
              
               </div>
           </div>
+          <div id="readings">
+                      
+
+                        <h2>READINGS:</h2>
+
+                    </div>
         </div>
       </div>
     </div>
@@ -63,9 +69,11 @@
     });
       socket.on('connect',function(){
       console.log("connected to the pi");
+      socket.on('chat',function(temp1){
+        console.log(temp1);
+        document.getElementById("readings").innerHTML = "<h1>" +temp1.text + "</h1>";
+        
       });
-      socket.on('temp',function(temp){
-        console.log(temp.temp);
       });
     </script>
 
