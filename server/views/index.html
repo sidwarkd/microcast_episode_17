@@ -71,7 +71,7 @@
       console.log("connected to the pi");
       socket.on('chat',function(temp1){
         console.log(temp1);
-        document.getElementById("readings").innerHTML = "<h1>" +temp1.text + "</h1>";
+        document.getElementById("readings").innerHTML = "<h1>" +temp1 + "</h1>";
         
       });
       });
