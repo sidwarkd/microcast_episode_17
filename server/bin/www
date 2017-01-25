@@ -14,21 +14,11 @@ var io = require("socket.io").listen(server);
 io.on("connection", function(socket){
   console.log("Client Connected");
   
-  
-  setTimeout(function () {
-            socket.on('msg',function(msg){
-   		packet=msg.temp;
-        console.log(msg.temp);
-        console.log(packet);
-        
-        console.log("data send to front end");
-      });
-        }, 2000);
-  
-  setTimeout(function(){socket.emit('chat',packet);},2000);
-  
-  
-
+  socket.on("dh11Reading", function(reading){
+    // Received a new reading from the Pi. Send it along to the webpage
+    console.log("DH11 Reading: " + reading) // This prints out to the Heroku server log
+    io.emit("newDH11Reading", reading); // This sends it along to all of the other clients connected.
+  })
    
   socket.on("stateChanged", function(state){
     console.log("State Changed: " + state);
