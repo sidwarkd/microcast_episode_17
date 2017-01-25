@@ -22,29 +22,27 @@ var dht_sensor = {
         return sensorLib.initialize(11, 4);
     },
     read: function () {
-        var readout = sensorLib.read();
-        console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
+      var readout = sensorLib.read();
+      console.log('Temperature: ' + readout.temperature.toFixed(2) + 'C, ' +
             'humidity: ' + readout.humidity.toFixed(2) + '%');
-      data=readout.temperature;
-        setTimeout(function () {
-            dht_sensor.read();
-        }, 2000);
+      return readout;
     }
 };
  
 if (dht_sensor.initialize()) {
-    dht_sensor.read();
+    console.log("DHT Sensor initialized!");
 } else {
     console.warn('Failed to initialize sensor');
 }
 
 socket.on("connect", function(){
   console.log("Connected to server");
-  socket.emit('msg',data);
   socket.on("updateState", function(state){
     console.log("The new state is: " + state);
-    gpio.write(config.led, !state);
-    
-    
+    //gpio.write(config.led, !state);
   });
+  // send Temperature data every 5 seconds
+  setInterval(function(){
+    socket.emit("dh11Reading", dht_sensor.read());
+  }, 5000);
 })
