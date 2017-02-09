@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+<h2>This is the place where rest is used to get the temp</h2>
+
+<div id='readings'>
+    temperature
+</div>
+
+<div id='readings1'>
+    humidity
+</div>
+
+
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+    <script src="https://cdn.socket.io/socket.io-1.0.4.js"></script>
+
+  <script type="text/javascript">
+    var socket = io.connect('/');
+    
+    socket.on('connect',function(){
+      console.log("connected to the pi");
+      socket.on('newDH11Reading',function(reading){
+        console.log(reading);
+        document.getElementById("readings").innerHTML = "<h1>" +reading.temperature.toFixed(2) + "&#x2103" +"</h1>";
+        document.getElementById("readings1").innerHTML = "<h1>" +reading.humidity.toFixed(2) + '&#37' + "</h1>";
+      });
+    });
+    </script>
+    
+    </body>
+</html>

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 var debug = require('debug')('server');
 var app = require('../app');
+var packet=0;
 
 app.set('port', process.env.PORT || 3000);
 
@@ -12,7 +13,13 @@ var io = require("socket.io").listen(server);
 
 io.on("connection", function(socket){
   console.log("Client Connected");
-
+  
+  socket.on("dh11Reading", function(reading){
+    // Received a new reading from the Pi. Send it along to the webpage
+    console.log("DH11 Reading: " + reading) // This prints out to the Heroku server log
+    io.emit("newDH11Reading", reading); // This sends it along to all of the other clients connected.
+  })
+   
   socket.on("stateChanged", function(state){
     console.log("State Changed: " + state);
     io.emit("updateState", state);
